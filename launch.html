@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Launching App...</title>
-</head>
-<body>
-  <h2>Launching the app...</h2>
-  <script>
-    // Get the MetricTargetID from the URL
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("MetricTargetID");
+  <head>
+    <title>Launching Power Apps...</title>
+    <script>
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("MetricTargetID");
 
-    // Build the actual app URL dynamically using the ID
-    const appUrl = "https://apps.powerapps.com/play/e/881f7da4-e69a-40cf-944f-cd02c9c7d54c/a/eaa24c70-b458-429e-9c7f-747f01065dd0?MetricTargetID=" + encodeURIComponent(id);
+        if (id) {
+          const appUrl =
+            "https://apps.powerapps.com/play/e/881f7da4-e69a-40cf-944f-cd02c9c7d54c/a/eaa24c70-b458-429e-9c7f-747f01065dd0?MetricTargetID=" +
+            encodeURIComponent(id);
 
-    // Open Power Apps in a new tab
-    window.open(appUrl, "_blank");
-
-    // Optional: let user know
-    document.body.innerHTML += "<p>Your app was launched in a new tab. You can now close this tab.</p>";
-  </script>
-</body>
+          window.location.replace(appUrl); // redirect this tab to Power Apps
+        } else {
+          document.body.innerText = "Missing MetricTargetID.";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    Launching...
+  </body>
 </html>
